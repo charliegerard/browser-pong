@@ -118,10 +118,10 @@ window.onload = function(){
 
   button.onclick = function(){
     if(!player1 || player1.closed){
-      player1 = window.open("./index.html", "player1", strWindowFeatures);
+      player1 = window.open("./playerOneWindow.html", "player1", strWindowFeatures);
     }
     if(!ball || ball.closed){
-      ball = window.open("./index.html", "Ball", ballWindowFeatures);
+      ball = window.open("./ballWindow.html", "Ball", ballWindowFeatures);
     }
   }
 
