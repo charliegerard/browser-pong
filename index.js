@@ -30,7 +30,7 @@ var windowY = {
 }
 
 // ------------------------------------------------------------
-// Press Q to quit the game and close the ball + player windows
+// Press Q to quit the game and close all pop-up windows
 // ------------------------------------------------------------
 
 var quit = function(){
@@ -44,6 +44,7 @@ var quit = function(){
     player2.close()
   }
 }
+
 
 // ------------------------
 //  BALL MOVEMENTS
@@ -66,16 +67,30 @@ var moveBall = function(){
     windowX.now = outerContainer.right;
   }
 
-  // Detection of collision with player 1;
+  // -------------------------------------
+  // Detection of collision with player 2;
+  // -------------------------------------
 
   if(windowTop <= player2.windowBottom &&
       windowRight >= player2.windowLeft &&
-      windowRight > player2.windowRight &&
+      windowRight < player2.windowRight &&
       windowBottom >= player2.windowTop){
-        //Weird shtuff happening
+        // Need to fix this. Ball goes too fast
         ball.windowX.velocity *= -1;
         ball.windowY.velocity *= -1;
-      }
+  }
+
+  // -------------------------------------
+  // Detection of collision with player 1; Not totally working for now
+  // -------------------------------------
+
+  if(windowTop <= player1.windowBottom &&
+      windowLeft <= player1.windowRight &&
+      windowRight < player1.windowLeft &&
+      windowBottom >= player1.windowTop){
+        ball.windowX.velocity *= -1;
+        ball.windowY.velocity *= -1;
+  }
 
   windowX.velocity *= 1 + Math.random() * 0.004;
   windowX.now +=  Math.round( windowX.velocity );
