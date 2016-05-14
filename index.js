@@ -43,6 +43,9 @@ var quit = function(){
   if(player1 && !player1.closed){
     player1.close()
   }
+  if(player2 && !player2.closed){
+    player2.close()
+  }
 }
 
 // ------------------------
@@ -68,10 +71,10 @@ var moveBall = function(){
 
   // Detection of collision with player 1;
 
-  if(_top <= player1._bottom &&
-      _right >= player1._left &&
-      _right > player1._right &&
-      _bottom >= player1._top){
+  if(_top <= player2._bottom &&
+      _right >= player2._left &&
+      _right > player2._right &&
+      _bottom >= player2._top){
         //Weird shit happening
         ball.x.velocity *= -1;
         ball.y.velocity *= -1;
@@ -90,7 +93,7 @@ var moveBall = function(){
 }
 
 
-var movePlayerOne = function(){
+var movePlayerTwo = function(){
   x.now += ( x.target - x.now  ) / 5;
   x.now  = Math.round( x.now  );
   y.now += ( y.target - y.now ) / 5;
@@ -113,15 +116,19 @@ var go_down = function(){
 
 window.onload = function(){
   var button = document.getElementById('button');
-  var strWindowFeatures = "menubar=no,location=yes,resizable=yes,scrollbars=no,status=yes,width=100,height=200,screenX=1250";
+  var playerOneWindowFeatures = "menubar=no,location=yes,resizable=yes,scrollbars=no,status=yes,width=100,height=200,screenX=50";
+  var playerTwoWindowFeatures = "menubar=no,location=yes,resizable=yes,scrollbars=no,status=yes,width=100,height=200,screenX=1250";
   var ballWindowFeatures = "menubar=no,location=yes,resizable=no,scrollbars=no,status=yes,width=100,height=100,screenX=50";
 
   button.onclick = function(){
     if(!player1 || player1.closed){
-      player1 = window.open("./playerOneWindow.html", "player1", strWindowFeatures);
+      player1 = window.open("./playerOneWindow.html", "player1", playerOneWindowFeatures);
     }
     if(!ball || ball.closed){
       ball = window.open("./ballWindow.html", "Ball", ballWindowFeatures);
+    }
+    if(!player2 || player2.closed){
+      player2 = window.open('./playerTwo.html', 'player2', playerTwoWindowFeatures);
     }
   }
 
@@ -150,15 +157,29 @@ window.onload = function(){
     y.target = screen.height / 2 - window.outerHeight / 2;
     y.now = y.target;
 
-    window.setInterval("movePlayerOne()", 50);
+  } else if(window.name === 'player2'){
+    base = window.opener;
+    ball = base.ball;
+    player1 = base.player1;
+    player2 = window;
+
+    container.right = screen.width - unit;
+    container.left = container.right - window.outerWidth;
+
+    x.target = window.screenX;
+    x.now = x.target;
+    y.target = screen.height / 2 - window.outerHeight / 2;
+    y.now = y.target;
+
+    window.setInterval("movePlayerTwo()", 50);
   }
 
   window.addEventListener('keydown', function(e){
     if(e.keyCode == 38){
-      player1.go_up();
+      player2.go_up();
     }
     if(e.keyCode == 40){
-      player1.go_down();
+      player2.go_down();
     }
     if(e.keyCode == 81){
       base.quit()
