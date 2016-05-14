@@ -17,13 +17,13 @@ var outerContainer = {
 }
 
 // window movement
-var x = {
+var windowX = {
   current: 0,
   target: 0,
   velocity: 0
 }
 
-var y = {
+var windowY = {
   now: 0,
   target: 0,
   velocity: 0
@@ -50,20 +50,20 @@ var quit = function(){
 // ------------------------
 
 var moveBall = function(){
-  if(windowTop <= outerContainer.top + 20 && y.velocity < 0){
-    y.velocity *= -1;
+  if(windowTop <= outerContainer.top + 20 && windowY.velocity < 0){
+    windowY.velocity *= -1;
   }
 
-  if(windowBottom >= outerContainer.bottom - 20 && y.velocity > 0){
-    y.velocity *= -1;
+  if(windowBottom >= outerContainer.bottom - 20 && windowY.velocity > 0){
+    windowY.velocity *= -1;
   }
 
-  if(windowRight >= outerContainer.right && x.velocity > 0){
-    x.now = outerContainer.left;
+  if(windowRight >= outerContainer.right && windowX.velocity > 0){
+    windowX.now = outerContainer.left;
   }
 
-  if(windowLeft <= outerContainer.left && x.velocity < 0){
-    x.now = outerContainer.right;
+  if(windowLeft <= outerContainer.left && windowX.velocity < 0){
+    windowX.now = outerContainer.right;
   }
 
   // Detection of collision with player 1;
@@ -72,50 +72,50 @@ var moveBall = function(){
       windowRight >= player2.windowLeft &&
       windowRight > player2.windowRight &&
       windowBottom >= player2.windowTop){
-        //Weird shit happening
-        ball.x.velocity *= -1;
-        ball.y.velocity *= -1;
+        //Weird shtuff happening
+        ball.windowX.velocity *= -1;
+        ball.windowY.velocity *= -1;
       }
 
-  x.velocity *= 1 + Math.random() * 0.004;
-  x.now +=  Math.round( x.velocity );
-  y.velocity *= 1 + Math.random() * 0.003;
-  y.now +=  Math.round( y.velocity );
+  windowX.velocity *= 1 + Math.random() * 0.004;
+  windowX.now +=  Math.round( windowX.velocity );
+  windowY.velocity *= 1 + Math.random() * 0.003;
+  windowY.now +=  Math.round( windowY.velocity );
 
-  window.moveTo( x.now, y.now );
-  windowTop = y.now;
-  windowRight  = x.now + window.outerWidth;
-  windowBottom = y.now + window.outerHeight;
-  windowLeft   = x.now;
+  window.moveTo( windowX.now, windowY.now );
+  windowTop = windowY.now;
+  windowRight  = windowX.now + window.outerWidth;
+  windowBottom = windowY.now + window.outerHeight;
+  windowLeft   = windowX.now;
 }
 
 
 var movePlayerTwo = function(){
-  x.now += ( x.target - x.now  ) / 3;
-  x.now  = Math.round( x.now  );
-  y.now += ( y.target - y.now ) / 3;
-  y.now  = Math.round( y.now );
+  windowX.now += ( windowX.target - windowX.now  ) / 3;
+  windowX.now  = Math.round( windowX.now  );
+  windowY.now += ( windowY.target - windowY.now ) / 3;
+  windowY.now  = Math.round( windowY.now );
 
-  window.moveTo( x.now, y.now );
-  windowTop    = y.now;
-  windowRight  = x.now + window.outerWidth;
-  windowBottom = y.now + window.outerHeight;
-  windowLeft   = x.now;
+  window.moveTo( windowX.now, windowY.now );
+  windowTop    = windowY.now;
+  windowRight  = windowX.now + window.outerWidth;
+  windowBottom = windowY.now + window.outerHeight;
+  windowLeft   = windowX.now;
 }
 
-var go_up = function(){
-  y.target -= windowWidth * 1;
+var goUp = function(){
+  windowY.target -= windowWidth * 1;
 }
 
-var go_down = function(){
-  y.target += windowWidth * 1;
+var goDown = function(){
+  windowY.target += windowWidth * 1;
 }
 
 window.onload = function(){
   var button = document.getElementById('button');
   var playerOneWindowFeatures = "menubar=no,location=yes,resizable=yes,scrollbars=no,status=yes,width=90,height=200,screenX=50";
   var playerTwoWindowFeatures = "menubar=no,location=yes,resizable=yes,scrollbars=no,status=yes,width=90,height=200,screenX=1250";
-  var ballWindowFeatures = "menubar=no,location=yes,resizable=no,scrollbars=no,status=yes,width=90,height=100,screenX=50";
+  var ballWindowFeatures = "menubar=no,location=yes,resizable=no,scrollbars=no,status=yes,width=90,height=100";
 
   button.onclick = function(){
     if(!player1 || player1.closed){
@@ -135,8 +135,8 @@ window.onload = function(){
     player1  = base.player1;
     player2  = base.player2;
 
-    x.now = Math.round( screen.width  / 2 - window.outerWidth  / 2 );
-    y.now = Math.round( screen.height / 2 - window.outerHeight / 2 );
+    windowX.now = Math.round( screen.width  / 2 - window.outerWidth  / 2 );
+    windowY.now = Math.round( screen.height / 2 - window.outerHeight / 2 );
     window.reset();
     window.setInterval( "moveBall()", 50 );
 
@@ -149,10 +149,10 @@ window.onload = function(){
     outerContainer.left = windowWidth;
     outerContainer.right = outerContainer.left + window.outerWidth;
 
-    x.target = window.screenX;
-    x.now = x.target;
-    y.target = screen.height / 2 - window.outerHeight / 2;
-    y.now = y.target;
+    windowX.target = window.screenX;
+    windowX.now = windowX.target;
+    windowY.target = screen.height / 2 - window.outerHeight / 2;
+    windowY.now = windowY.target;
 
   } else if(window.name === 'player2'){
     base = window.opener;
@@ -163,20 +163,20 @@ window.onload = function(){
     outerContainer.right = screen.width - windowWidth;
     outerContainer.left = outerContainer.right - window.outerWidth;
 
-    x.target = window.screenX;
-    x.now = x.target;
-    y.target = screen.height / 2 - window.outerHeight / 2;
-    y.now = y.target;
+    windowX.target = window.screenX;
+    windowX.now = windowX.target;
+    windowY.target = screen.height / 2 - window.outerHeight / 2;
+    windowY.now = windowY.target;
 
     window.setInterval("movePlayerTwo()", 50);
   }
 
   window.addEventListener('keydown', function(e){
     if(e.keyCode == 38){
-      player2.go_up();
+      player2.goUp();
     }
     if(e.keyCode == 40){
-      player2.go_down();
+      player2.goDown();
     }
     if(e.keyCode == 81){
       base.quit()
@@ -185,15 +185,15 @@ window.onload = function(){
 }
 
 var reset = function(){
-	if( x.velocity == 0 ){
-		x.velocity = Math.round( Math.random() * 20 ) + 20;
-		if( Math.round( Math.random( 0, 1 )) ) x.velocity *= -1;
+	if( windowX.velocity == 0 ){
+		windowX.velocity = Math.round( Math.random() * 20 ) + 20;
+		if( Math.round( Math.random( 0, 1 )) ) windowX.velocity *= -1;
 	} else {
-		var temp = x.velocity;
-		x.velocity = Math.round( Math.random() * 20 ) + 20;
-		if( temp < 0 ) x.velocity *= -1;
+		var temp = windowX.velocity;
+		windowX.velocity = Math.round( Math.random() * 20 ) + 20;
+		if( temp < 0 ) windowX.velocity *= -1;
 	};
-	y.velocity = Math.round( Math.random() * 20 ) + 15;
-	y.velocity = Math.abs( y.velocity ) * -1;
-	y.now -= windowWidth;
+	windowY.velocity = Math.round( Math.random() * 20 ) + 15;
+	windowY.velocity = Math.abs( windowY.velocity ) * -1;
+	windowY.now -= windowWidth;
 };
