@@ -1,4 +1,8 @@
+// Player 2 is the one that can be controlled by the user;
+
 var ball, player1, player2, base;
+var counterOne = 0;
+var counterTwo = 0;
 
 // window details
 // var unit = Math.round( screen.width / 16 );
@@ -45,18 +49,19 @@ var quit = function(){
   }
 }
 
-
 // ------------------------
 //  BALL MOVEMENTS
 // ------------------------
 
 var moveBall = function(){
   if(windowTop <= outerContainer.top + 20 && windowY.velocity < 0){
-    windowY.velocity *= -1;
+    // windowY.velocity *= -1;
+    windowY.velocity = -windowY.velocity;
   }
 
   if(windowBottom >= outerContainer.bottom - 20 && windowY.velocity > 0){
-    windowY.velocity *= -1;
+    // windowY.velocity *= -1;
+    windowY.velocity = -windowY.velocity;
   }
 
   if(windowRight >= outerContainer.right && windowX.velocity > 0){
@@ -71,25 +76,35 @@ var moveBall = function(){
   // Detection of collision with player 2;
   // -------------------------------------
 
-  if(windowTop <= player2.windowBottom &&
-      windowRight >= player2.windowLeft &&
-      windowRight < player2.windowRight &&
-      windowBottom >= player2.windowTop){
-        // Need to fix this. Ball goes too fast
-        ball.windowX.velocity *= -1;
-        ball.windowY.velocity *= -1;
+  if(windowTop <= player2.windowBottom && windowRight >= player2.windowLeft &&
+     windowRight < player2.windowRight && windowBottom >= player2.windowTop){
+      // Need to fix this. Ball goes too fast
+      // ball.windowX.velocity *= -1;
+      ball.windowX.velocity = -ball.windowX.velocity;
+      // ball.windowY.velocity *= -1;
+      ball.windowY.velocity = -ball.windowY.velocity;
+
+  } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
+    var counterOneDiv = player1.document.getElementById('player-one-counter');
+    counterOne += 1;
+    counterOneDiv.innerHTML = counterOne;
   }
 
   // -------------------------------------
   // Detection of collision with player 1; Not totally working for now
   // -------------------------------------
-
   if(windowTop <= player1.windowBottom &&
       windowLeft <= player1.windowRight &&
       windowRight < player1.windowLeft &&
       windowBottom >= player1.windowTop){
-        ball.windowX.velocity *= -1;
-        ball.windowY.velocity *= -1;
+        // ball.windowX.velocity *= -1;
+        ball.windowX.velocity = -ball.windowX.velocity;
+        // ball.windowY.velocity *= -1;
+        ball.windowY.velocity = -ball.windowY.velocity;
+  } else if(windowLeft <= outerContainer.left && windowX.velocity < 0 ){
+    var counterTwoDiv = player2.document.getElementById('player-two-counter');
+    counterTwo += 1;
+    counterTwoDiv.innerHTML = counterTwo;
   }
 
   windowX.velocity *= 1 + Math.random() * 0.004;
@@ -104,9 +119,15 @@ var moveBall = function(){
   windowLeft   = windowX.now;
 }
 
+var movePlayerOne = function(){
+  windowTop = windowX.now;
+  windowBottom = windowY.now + window.outerHeight;
+  windowRight = windowX.now + window.outerWidth;
+  windowLeft = windowX.now;
+}
 
 var movePlayerTwo = function(){
-  windowX.now += ( windowX.target - windowX.now  ) / 3;
+  windowX.now += ( windowX.target - windowX.now ) / 3;
   windowX.now  = Math.round( windowX.now  );
   windowY.now += ( windowY.target - windowY.now ) / 3;
   windowY.now  = Math.round( windowY.now );
@@ -168,6 +189,8 @@ window.onload = function(){
     windowX.now = windowX.target;
     windowY.target = screen.height / 2 - window.outerHeight / 2;
     windowY.now = windowY.target;
+
+    window.setInterval("movePlayerOne()", 50);
 
   } else if(window.name === 'player2'){
     base = window.opener;
