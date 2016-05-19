@@ -1,19 +1,86 @@
 body{
   margin: 0;
-  font-family: 'Open Sans';
+  /*font-family: 'Open Sans';*/
+  font-family: 'Lato';
+  background-color: rgb(16,16,24);
+}
+
+#container{
+  width: 100%;
+  display: block;
+  margin-top: 10%;
+  position: absolute;
+  height: 100%;
 }
 
 h1{
   text-align: center;
+  font-size: 80px;
+  font-weight: 100;
+  color: white;
+}
+
+#buttons{
+  width: 25em;
+  display: block;
+  margin: 0 auto;
+}
+
+#quit{
+  color: white;
+  display: inline-block;
+  padding: 0.5em 1em;
+  /*background-color: #00BCD4;*/
+  border: 1px solid white;
+  width: 4rem;
+  height: 4rem;
+  vertical-align: top;
+  text-align: center;
+  line-height: 4rem;
 }
 
 #button{
-  display: block;
-  margin: 0 auto;
-  padding: 0.5em;
-  border: 1px solid grey;
-  width: 5em;
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: 1px solid white;
+  width: 4rem;
+  height: 4rem;
   text-align: center;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  /*background-color: rgb(47, 183, 135);*/
+  text-align: center;
+  line-height: 4rem;
+}
+
+#arrow-up{
+  /*background-color: #8BC34A;*/
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid white;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 4rem;
+  color: white;
+  padding: 0.5em 1em;
+}
+
+
+#arrow-down{
+  /*background-color: #607D8B;*/
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid white;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 4rem;
+  color: white;
+  padding: 0.5em 1em;
 }
 
 #ball-container{
