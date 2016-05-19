@@ -74,14 +74,11 @@ var moveBall = function(){
   // -------------------------------------
   // Detection of collision with player 2;
   // -------------------------------------
-
   if(windowTop <= player2.windowBottom && windowRight >= player2.windowLeft &&
      windowRight < player2.windowRight && windowBottom >= player2.windowTop && ball.windowX.velocity > 0){
-      // Need to fix this. Ball goes too fast
-      // ball.windowX.velocity *= -1;
+       
       ball.windowX.velocity = -ball.windowX.velocity;
-      // ball.windowY.velocity *= -1;
-      ball.windowY.velocity = -ball.windowY.velocity;
+      ball.windowY.velocity += (player2.windowX.velocity / 2);
 
   } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
     var counterOneDiv = player1.document.getElementById('player-one-counter');
@@ -95,10 +92,10 @@ var moveBall = function(){
 
   if(windowTop <= player1.windowBottom && windowLeft <= player1.windowRight &&
      windowLeft < player1.windowLeft && windowBottom >= player1.windowTop && ball.windowX.velocity < 0){
-        // ball.windowX.velocity *= -1;
         ball.windowX.velocity = -ball.windowX.velocity;
-        // ball.windowY.velocity *= -1;
-        ball.windowY.velocity = -ball.windowY.velocity;
+        //The following gives a new direction to the ball
+        //depending on which side of the paddle it hit.
+        ball.windowY.velocity += (player1.windowX.velocity / 2);
   } else if(windowLeft <= outerContainer.left && windowX.velocity < 0 ){
     var counterTwoDiv = player2.document.getElementById('player-two-counter');
     counterTwo += 1;
