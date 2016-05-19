@@ -120,10 +120,10 @@ var moveBall = function(){
 var movePlayerOne = function(){
   var ballYPosition = base.ball.windowY.now;
   var diff = (windowY.now + (window.outerHeight / 2)) - ballYPosition;
-  if(diff < 0){
+  if(diff < 0 && diff < -200){
     windowY.target += windowWidth * 1;
   }
-  if(diff > 0){
+  if(diff > 0 && diff > 200){
     windowY.target -= windowWidth * 1;
   }
 
