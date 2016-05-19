@@ -5,14 +5,13 @@ var counterOne = 0;
 var counterTwo = 0;
 
 // window details
-// var unit = Math.round( screen.width / 16 );
 var windowWidth = 100;
 var windowTop,
     windowRight,
     windowBottom,
     windowLeft;
 
-// outerContainer coundaries
+// outerContainer boundaries
 var outerContainer = {
   top: 0,
   right: screen.width,
@@ -77,7 +76,7 @@ var moveBall = function(){
   // -------------------------------------
 
   if(windowTop <= player2.windowBottom && windowRight >= player2.windowLeft &&
-     windowRight < player2.windowRight && windowBottom >= player2.windowTop){
+     windowRight < player2.windowRight && windowBottom >= player2.windowTop && ball.windowX.velocity > 0){
       // Need to fix this. Ball goes too fast
       // ball.windowX.velocity *= -1;
       ball.windowX.velocity = -ball.windowX.velocity;
@@ -93,10 +92,9 @@ var moveBall = function(){
   // -------------------------------------
   // Detection of collision with player 1; Not totally working for now
   // -------------------------------------
-  if(windowTop <= player1.windowBottom &&
-      windowLeft <= player1.windowRight &&
-      windowRight < player1.windowLeft &&
-      windowBottom >= player1.windowTop){
+
+  if(windowTop <= player1.windowBottom && windowLeft <= player1.windowRight &&
+     windowLeft < player1.windowLeft && windowBottom >= player1.windowTop && ball.windowX.velocity < 0){
         // ball.windowX.velocity *= -1;
         ball.windowX.velocity = -ball.windowX.velocity;
         // ball.windowY.velocity *= -1;
@@ -120,6 +118,21 @@ var moveBall = function(){
 }
 
 var movePlayerOne = function(){
+  var ballYPosition = base.ball.windowY.now;
+  var diff = (windowY.now + (window.outerHeight / 2)) - ballYPosition;
+  if(diff < 0){
+    windowY.target += windowWidth * 1;
+  }
+  if(diff > 0){
+    windowY.target -= windowWidth * 1;
+  }
+
+  windowX.now += ( windowX.target - windowX.now ) / 3;
+  windowX.now  = Math.round( windowX.now  );
+  windowY.now += ( windowY.target - windowY.now ) / 3;
+  windowY.now  = Math.round( windowY.now );
+
+  window.moveTo( windowX.now, windowY.now );
   windowTop = windowX.now;
   windowBottom = windowY.now + window.outerHeight;
   windowRight = windowX.now + window.outerWidth;
