@@ -76,7 +76,7 @@ var moveBall = function(){
   // -------------------------------------
   if(windowTop <= player2.windowBottom && windowRight >= player2.windowLeft &&
      windowRight < player2.windowRight && windowBottom >= player2.windowTop && ball.windowX.velocity > 0){
-       
+
       ball.windowX.velocity = -ball.windowX.velocity;
       ball.windowY.velocity += (player2.windowX.velocity / 2);
 
@@ -112,6 +112,8 @@ var moveBall = function(){
   windowRight  = windowX.now + window.outerWidth;
   windowBottom = windowY.now + window.outerHeight;
   windowLeft   = windowX.now;
+
+  checkCounters(counterOne, counterTwo);
 }
 
 var movePlayerOne = function(){
@@ -124,12 +126,12 @@ var movePlayerOne = function(){
     windowY.target -= windowWidth * 1;
   }
 
-  windowX.now += ( windowX.target - windowX.now ) / 3;
-  windowX.now  = Math.round( windowX.now  );
-  windowY.now += ( windowY.target - windowY.now ) / 3;
-  windowY.now  = Math.round( windowY.now );
+  windowX.now += (windowX.target - windowX.now) / 3;
+  windowX.now = Math.round(windowX.now);
+  windowY.now += (windowY.target - windowY.now) / 3;
+  windowY.now = Math.round(windowY.now);
 
-  window.moveTo( windowX.now, windowY.now );
+  window.moveTo(windowX.now, windowY.now);
   windowTop = windowX.now;
   windowBottom = windowY.now + window.outerHeight;
   windowRight = windowX.now + window.outerWidth;
@@ -137,16 +139,16 @@ var movePlayerOne = function(){
 }
 
 var movePlayerTwo = function(){
-  windowX.now += ( windowX.target - windowX.now ) / 3;
-  windowX.now  = Math.round( windowX.now  );
-  windowY.now += ( windowY.target - windowY.now ) / 3;
-  windowY.now  = Math.round( windowY.now );
+  windowX.now += (windowX.target - windowX.now) / 3;
+  windowX.now = Math.round( windowX.now);
+  windowY.now += (windowY.target - windowY.now) / 3;
+  windowY.now = Math.round(windowY.now);
 
-  window.moveTo( windowX.now, windowY.now );
-  windowTop    = windowY.now;
-  windowRight  = windowX.now + window.outerWidth;
+  window.moveTo(windowX.now, windowY.now);
+  windowTop = windowY.now;
+  windowRight = windowX.now + window.outerWidth;
   windowBottom = windowY.now + window.outerHeight;
-  windowLeft   = windowX.now;
+  windowLeft = windowX.now;
 }
 
 var goUp = function(){
@@ -155,6 +157,16 @@ var goUp = function(){
 
 var goDown = function(){
   windowY.target += windowWidth * 1;
+}
+
+var checkCounters(counterOne, counterTwo){
+  if(counterOne === 10){
+    console.log('you lose')
+  }
+
+  if(counterTwo === 10){
+    console.log('you win')
+  }
 }
 
 window.onload = function(){
