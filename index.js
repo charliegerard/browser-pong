@@ -1,8 +1,8 @@
 // Player 2 is the one that can be controlled by the user;
 
 var ball, player1, player2, base;
-var counterOne = 0;
-var counterTwo = 0;
+var counter1 = 0;
+var counter2 = 0;
 
 // window details
 var windowWidth = 100;
@@ -82,8 +82,8 @@ var moveBall = function(){
 
   } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
     var counterOneDiv = player1.document.getElementById('player-one-counter');
-    counterOne += 1;
-    counterOneDiv.innerHTML = counterOne;
+    base.counter1 += 1;
+    counterOneDiv.innerHTML = base.counter1;
   }
 
   // -------------------------------------
@@ -98,8 +98,8 @@ var moveBall = function(){
         ball.windowY.velocity += (player1.windowX.velocity / 2);
   } else if(windowLeft <= outerContainer.left && windowX.velocity < 0 ){
     var counterTwoDiv = player2.document.getElementById('player-two-counter');
-    counterTwo += 1;
-    counterTwoDiv.innerHTML = counterTwo;
+    base.counter2 += 1;
+    counterTwoDiv.innerHTML = base.counter2;
   }
 
   windowX.velocity *= 1 + Math.random() * 0.004;
@@ -113,7 +113,6 @@ var moveBall = function(){
   windowBottom = windowY.now + window.outerHeight;
   windowLeft   = windowX.now;
 
-  checkCounters(counterOne, counterTwo);
 }
 
 var movePlayerOne = function(){
@@ -159,13 +158,15 @@ var goDown = function(){
   windowY.target += windowWidth * 1;
 }
 
-var checkCounters(counterOne, counterTwo){
-  if(counterOne === 10){
+var checkCounters = function(counter1, counter2){
+  if(counter1 === 10){
     console.log('you lose')
+    alert('you lose')
   }
 
-  if(counterTwo === 10){
+  if(counter2 === 10){
     console.log('you win')
+    alert('you win')
   }
 }
 
@@ -203,6 +204,7 @@ window.onload = function(){
     ball = base.ball;
     player1 = window;
     player2 = base.player2;
+    counter1 = base.counter1;
 
     outerContainer.left = windowWidth;
     outerContainer.right = outerContainer.left + window.outerWidth;
@@ -219,6 +221,7 @@ window.onload = function(){
     ball = base.ball;
     player1 = base.player1;
     player2 = window;
+    counter2 = base.counter2;
 
     outerContainer.right = screen.width - windowWidth;
     outerContainer.left = outerContainer.right - window.outerWidth;
@@ -242,6 +245,8 @@ window.onload = function(){
       base.quit()
     }
   })
+  window.setInterval(function(){checkCounters(counter1, counter2)}, 500);
+
 }
 
 var reset = function(){
