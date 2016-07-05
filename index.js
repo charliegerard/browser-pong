@@ -79,11 +79,16 @@ var moveBall = function(){
 
       ball.windowX.velocity = -ball.windowX.velocity;
       ball.windowY.velocity += (player2.windowX.velocity / 2);
+      playSound('jump.wav');
 
   } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
     var counterOneDiv = player1.document.getElementById('player-one-counter');
     base.counter1 += 1;
     counterOneDiv.innerHTML = base.counter1;
+
+    if(base.counter1 === 2){
+      playSound('sprout.wav')
+    }
   }
 
   // -------------------------------------
@@ -96,10 +101,16 @@ var moveBall = function(){
         //The following gives a new direction to the ball
         //depending on which side of the paddle it hit.
         ball.windowY.velocity += (player1.windowX.velocity / 2);
+        playSound('fireball.wav');
+
   } else if(windowLeft <= outerContainer.left && windowX.velocity < 0 ){
     var counterTwoDiv = player2.document.getElementById('player-two-counter');
     base.counter2 += 1;
     counterTwoDiv.innerHTML = base.counter2;
+
+    if(base.counter2 === 2){
+      playSound('sprout.wav')
+    }
   }
 
   windowX.velocity *= 1 + Math.random() * 0.004;
@@ -112,7 +123,6 @@ var moveBall = function(){
   windowRight  = windowX.now + window.outerWidth;
   windowBottom = windowY.now + window.outerHeight;
   windowLeft   = windowX.now;
-
 }
 
 var movePlayerOne = function(){
@@ -158,16 +168,9 @@ var goDown = function(){
   windowY.target += windowWidth * 1;
 }
 
-var checkCounters = function(counter1, counter2){
-  if(counter1 === 10){
-    console.log('you lose')
-    alert('you lose')
-  }
-
-  if(counter2 === 10){
-    console.log('you win')
-    alert('you win')
-  }
+var playSound = function(filename){
+  var audio = new Audio(`./sounds/${filename}`);
+  audio.play();
 }
 
 window.onload = function(){
@@ -245,8 +248,6 @@ window.onload = function(){
       base.quit()
     }
   })
-  window.setInterval(function(){checkCounters(counter1, counter2)}, 500);
-
 }
 
 var reset = function(){
