@@ -1,27 +1,40 @@
+@font-face {
+  font-family: "abduction";
+  src: url("font/abduction2002.ttf");
+}
+
 body{
   margin: 0;
   /*font-family: 'Open Sans';*/
-  font-family: 'Lato';
-  background-color: rgb(16,16,24);
+  /*font-family: 'Lato';*/
+  font-family: 'abduction';
+  background-color: rgb(15,0,57);
 }
 
 #container{
   width: 100%;
   display: block;
-  margin-top: 10%;
+  margin-top:10em;
   position: absolute;
-  height: 100%;
+  /*height: 100%;*/
 }
 
 h1{
   text-align: center;
   font-size: 80px;
   font-weight: 100;
-  color: white;
+  /*color: white;*/
+  color: rgb(220, 0, 134);
+  text-shadow: 10px 10px 10px rgb(36, 0, 252);
+  transform: rotate(-10deg);
+}
+
+.pong{
+  margin-left: -150px;
 }
 
 #buttons{
-  width: 25em;
+  width: 30em;
   display: block;
   margin: 0 auto;
 }
@@ -31,7 +44,7 @@ h1{
   display: inline-block;
   padding: 0.5em 1em;
   /*background-color: #00BCD4;*/
-  border: 1px solid white;
+  border: 3px solid rgb(36, 0, 252);
   width: 4rem;
   height: 4rem;
   vertical-align: top;
@@ -39,10 +52,14 @@ h1{
   line-height: 4rem;
 }
 
+#quit span{
+  font-size: 10px;
+}
+
 #button{
   display: inline-block;
   padding: 0.5em 1em;
-  border: 1px solid white;
+  border: 3px solid rgb(36, 0, 252);
   width: 4rem;
   height: 4rem;
   text-align: center;
@@ -63,7 +80,7 @@ h1{
   display: inline-block;
   width: 4rem;
   height: 4rem;
-  border: 1px solid white;
+  border: 3px solid rgb(36, 0, 252);
   font-size: 15px;
   font-weight: 400;
   text-align: center;
@@ -78,7 +95,7 @@ h1{
   display: inline-block;
   width: 4rem;
   height: 4rem;
-  border: 1px solid white;
+  border: 3px solid rgb(36, 0, 252);
   font-size: 15px;
   font-weight: 400;
   text-align: center;
