@@ -16,17 +16,16 @@ body{
   display: block;
   margin-top:10em;
   position: absolute;
-  /*height: 100%;*/
 }
 
 h1{
   text-align: center;
   font-size: 80px;
   font-weight: 100;
-  /*color: white;*/
   color: rgb(220, 0, 134);
   text-shadow: 10px 10px 10px rgb(36, 0, 252);
   transform: rotate(-10deg);
+  margin-left: 0.5em;
 }
 
 .pong{
@@ -34,7 +33,7 @@ h1{
 }
 
 #buttons{
-  width: 30em;
+  width: 28em;
   display: block;
   margin: 0 auto;
 }
@@ -71,9 +70,38 @@ h1{
   line-height: 4rem;
 }
 
-#button:hover{
-  background-color: lightgrey;
+
+@-webkit-keyframes fadeIt {
+  0%   { background-color: none; }
+  50%  { background-color: lightgrey; }
+  100% { background-color: none; }
 }
+@-moz-keyframes fadeIt {
+  0%   { background-color: none; }
+  50%  { background-color: lightgrey; }
+  100% { background-color: none; }
+}
+@-o-keyframes fadeIt {
+  0%   { background-color: none; }
+  50%  { background-color: lightgrey; }
+  100% { background-color: none; }
+}
+@keyframes fadeIt {
+  0%   { background-color: none; }
+  50%  { background-color: lightgrey; }
+  100% { background-color: none; }
+}
+
+#button{
+    -webkit-animation: fadeIt 4s ease-in-out;
+       -moz-animation: fadeIt 4s ease-in-out;
+         -o-animation: fadeIt 4s ease-in-out;
+            animation: fadeIt 4s ease-in-out;
+            animation-iteration-count: infinite;
+}
+
+
+
 
 #arrow-up{
   /*background-color: #8BC34A;*/
@@ -115,7 +143,7 @@ h1{
 
 #playerOne-container{
   display: block;
-  background-color: rgb(47, 183, 135);
+  background-color: rgb(36, 0, 252);
   width: 100%;
   height: 100%;
   margin: 0;
@@ -133,7 +161,7 @@ h1{
 
 #playerTwo-container{
   display: block;
-  background-color: #8BC34A;
+  background-color: rgb(220, 0, 134);
   width: 100%;
   height: 100%;
   margin: 0;
