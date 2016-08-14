@@ -167,3 +167,54 @@ h1{
   margin: 0;
   position: absolute;
 }
+
+#mobile-message{
+  display: none;
+}
+
+#mobile-message.mobile{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#mobile-message.mobile p {
+  display: block;
+  font-size: 30px;
+  background-color: lightgrey;
+  position: relative;;
+  top: 17em;
+  width: 85%;
+  padding: 1em;
+  left: 1em;
+  opacity: 1;
+  font-size: 40px;
+}
+
+@media screen and (max-device-width: 470px) {
+  #container{
+    margin-top: 25em;
+  }
+
+  h1{
+    font-size: 150px;
+  }
+  #buttons{
+    width: 75%;
+  }
+  #quit, #button, #arrow-up, #arrow-down{
+    width: 8em;
+    height: 8em;
+    line-height: 8em;
+  }
+
+  #button, #arrow-up, #arrow-down{
+    font-size: 16px;
+  }
+
+  #quit span{
+    font-size: 17px;
+  }
+}
