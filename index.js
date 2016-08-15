@@ -83,20 +83,19 @@ var moveBall = function(){
 
   } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
     var counterOneDiv = player1.document.getElementById('player-one-counter');
+    var previousCounter = base.counter1;
     base.counter1 += 1;
-    counterOneDiv.innerHTML = base.counter1;
-
-    if(base.counter1 === 2){
+    if(base.counter1 === previousCounter+1){
       playSound('sprout.wav')
     }
+    counterOneDiv.innerHTML = base.counter1;
   }
 
   // -------------------------------------
   // Detection of collision with player 1; Not totally working for now
   // -------------------------------------
-
-  if(windowTop <= player1.windowBottom && windowLeft <= player1.windowRight &&
-     windowLeft < player1.windowLeft && windowBottom >= player1.windowTop && ball.windowX.velocity < 0){
+  // just removed this `&& windowLeft < player1.windowLeft` seems to improve collision detection
+  if(windowTop <= player1.windowBottom && windowLeft <= player1.windowRight && windowBottom >= player1.windowTop && ball.windowX.velocity < 0){
         ball.windowX.velocity = -ball.windowX.velocity;
         //The following gives a new direction to the ball
         //depending on which side of the paddle it hit.
@@ -105,12 +104,13 @@ var moveBall = function(){
 
   } else if(windowLeft <= outerContainer.left && windowX.velocity < 0 ){
     var counterTwoDiv = player2.document.getElementById('player-two-counter');
+    var previousCounter = base.counter2;
     base.counter2 += 1;
-    counterTwoDiv.innerHTML = base.counter2;
-
-    if(base.counter2 === 2){
+    if(base.counter2 === previousCounter+1){
       playSound('sprout.wav')
     }
+
+    counterTwoDiv.innerHTML = base.counter2;
   }
 
   windowX.velocity *= 1 + Math.random() * 0.003;
