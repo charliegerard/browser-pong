@@ -1,11 +1,13 @@
-# Prototype of browser pong
+# Browser pong game
 
-Inspired by stewd.io browser pong game.
+[Link to game](http://charliegerard.github.io/browser-pong)
 
-Todo:
+Totally inspired by [stewd.io](http://stewd.io/pong/) browser pong game.
 
-* Make 2nd player.
-* Make AI for 2nd player.
-* Update UI
-* Score system.
-* Improve collision ball.
+Instructions
+---
+
+* Make sure to enable pop-up windows.
+* Click on the "Play" button.
+* Use the up and down arrows to move your player (right window).
+* Press 'Q' to close all windows and quit the game.
