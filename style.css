@@ -18,6 +18,12 @@ body{
   position: absolute;
 }
 
+#container p{
+  color: white;
+text-align: center;
+font-size: 12px;
+}
+
 h1{
   text-align: center;
   font-size: 80px;
