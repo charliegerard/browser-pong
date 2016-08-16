@@ -48,6 +48,14 @@ var quit = function(){
   }
 }
 
+var loserAlert = function(){
+  alert("Such a L.O.S.E.R...");
+}
+
+var winnerAlert = function(){
+  alert("YOU WIN!!!!!!")
+}
+
 // ------------------------
 //  BALL MOVEMENTS
 // ------------------------
@@ -81,12 +89,17 @@ var moveBall = function(){
       ball.windowY.velocity += (player2.windowX.velocity / 2);
       playSound('jump.wav');
 
-  } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses
+  } else if(windowRight >= outerContainer.right && windowX.velocity > 0) { //If user loses and computer wins
     var counterOneDiv = player1.document.getElementById('player-one-counter');
     var previousCounter = base.counter1;
     base.counter1 += 1;
     if(base.counter1 === previousCounter+1){
       playSound('sprout.wav')
+    }
+
+    if(base.counter1 === 15){
+      quit();
+      loserAlert();
     }
     counterOneDiv.innerHTML = base.counter1;
   }
@@ -108,6 +121,10 @@ var moveBall = function(){
     base.counter2 += 1;
     if(base.counter2 === previousCounter+1){
       playSound('sprout.wav')
+    }
+    if(base.counter2 === 15){
+      quit();
+      winnerAlert();
     }
 
     counterTwoDiv.innerHTML = base.counter2;
